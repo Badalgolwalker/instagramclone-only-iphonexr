@@ -1,0 +1,59 @@
+<% include ./partials/header.ejs %>
+<div class="w-full min-h-screen bg-zinc-900 text-white py-5">
+    <div class="w-full px-4 flex items-center justify-between">
+        <img class="w-1/4" src="/images/logo.png" alt="">
+      </div>
+      <h1>following wale friend</h1>
+
+  <% if(loggedinuser.following.length > 0){ %>
+    
+<div>
+ <% loggedinuser.following.forEach((ele) =>{ %>
+  <div class="title px-6 flex items-center gap-2 mt-5 justify-between">
+    <div class="title  flex items-center gap-2">
+      <div class="w-[8vw] h-[8vw] bg-sky-100 rounded-full overflow-hidden">
+          <img class="w-full h-full object-cover" src="/images/uploads/<%= ele.profileImage %>" alt="">
+         
+        </div>
+        <h4 class="text-sm"><%= ele.username %></h4>
+    </div>
+   <a href="/following/delete/<%= ele._id %>">
+    <div>
+      <% if(loggedinuser.following.indexOf(ele._id)){ %>
+        <button class="p-3 px-7 border-2 border-solid border-white rounded-2xl">unfollow</button>
+     <% }else{ %>
+      <button class="p-3 px-7 bg-blue-500 rounded-2xl">follow</button>
+     <% } %>
+   
+    </div>
+   </a>
+
+
+    </div>
+<% }) %>
+</div>
+<% } %>
+  <h1>user suggestion</h1>
+ <% users.forEach((elem)=>{ %>
+    <div class="title px-6 flex items-center gap-2 mt-5 justify-between">
+        <div class="title  flex items-center gap-2">
+          <div class="w-[8vw] h-[8vw] bg-sky-100 rounded-full overflow-hidden">
+              <img class="w-full h-full object-cover" src="/images/uploads/<%= elem.profileImage %>" alt="">
+             
+            </div>
+            <h4 class="text-sm"><%= elem.username %></h4>
+        </div>
+       <a href="/following/<%= elem._id %>">
+        <div>
+          <button class="p-3 px-7 bg-blue-500 rounded-2xl">follow</button>
+        </div>
+       </a>
+    
+    
+        </div>
+<% }) %>
+  <div>
+   
+  
+</div>
+<% include ./partials/footer.ejs %>
